@@ -29,7 +29,7 @@
   
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Dashboard</h1>
+          <h1 class="h2">{{$user->name}}'s Dashboard</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
               <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -41,46 +41,47 @@
             </button>
           </div>
         </div>
-        {{-- content goes here --}}
-
-        {{-- Customer see here --}}
-        {{-- end of cutomer view --}}
-        
-        {{-- Employee see here --}}
-        {{-- end of employee view --}}
-        
-        {{-- Delivery Person see here --}}
-        {{-- end of delivery Person view --}}
-
-        {{-- Owner see here --}}
-        @if()
-        <div class="row">
-            <div class="col">
-              Customers
-            </div>
-            <div class="col">
-              Users
-            </div>
-            <div class="col">
-              Offices
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-              Orders
-            </div>
-            <div class="col">
-              Payments
-            </div>
-            <div class="col">
-              Products
-            </div>
-        </div>
+        @if ($user->id == 1)
+          @foreach ($order as $items)
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <div class="caption text-center">
+                            <a href="#"><h3>Order #: {{$items->id}}</h3></a>
+                            <h5>Order Date: {{$items->orderDate}}</h5>
+                            <hr>
+                            <span class="badge badge-pill badge-success">{{$items->status}} Order</span>
+                            <hr>
+                        </div> <!-- end caption -->
+                            <ul>
+                                @foreach($detail as $details)
+                                  <li class="nav-item"><a class="nav-link" href="#">
+                                      {{$details->quantityOrdered}} x {{$details->name}} - ${{$details->priceEach}}.00
+                                  </li>
+                                @endforeach
+                            </ul>
+                    </div> <!-- end thumbnail -->
+                </div> <!-- end col-md-3 -->
+            </div> <!-- end row -->
+          @endforeach
+        @elseif($user->id == 2)
+          @foreach ($order as $items)
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="thumbnail">
+                        <div class="caption text-center">
+                            <a href="#"><h3>Order #: {{$items->id}}</h3></a>
+                            <h5>Order Date: {{$items->orderDate}}</h5>
+                            <hr>
+                            <span class="badge badge-pill badge-success">{{$items->status}} Order</span>
+                            <hr>
+                            <a href="#" class="btn btn-primary">Assign</a>
+                        </div> <!-- end caption -->
+                    </div> <!-- end thumbnail -->
+                </div> <!-- end col-md-3 -->
+            </div> <!-- end row -->
+          @endforeach
         @endif
-        {{-- end of owners view --}}
-        
-        {{-- content stops here --}}
-        <canvas class="my-4 w-100" id="myChart" width="900" height="380"> HI</canvas>
       </main>
     </div>
   </div>

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Contracts\Repos\IProductRepository;
+use App\Repos\Eloquent\ProductRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,4 +27,13 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
+        /**
+     * All of the container singletons that should be registered.
+     *
+     * @var array
+     */
+    public $singletons = [
+        IProductRepository::class =>  ProductRepository::class,
+    ];
 }

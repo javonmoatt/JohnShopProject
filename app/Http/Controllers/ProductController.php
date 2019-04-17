@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Product;
+use App\Contracts\Repos\IProductRepository;
 
 class ProductController extends Controller
 {
+    private $productRepo;
+
+    public function __construct(
+        IProductRepository $productRepo){
+        $this->productRepo = $productRepo;
+    }
+
     /**
      * Display a listing of the resource.
      *

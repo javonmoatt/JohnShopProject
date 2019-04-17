@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use DB;
+use App\Contracts\Repos\IProductRepository;
 
 class ProductsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
+    private $productRepo;
+
+    public function __construct(
+        IProductRepository $productRepo
+    ){
+        $this->productRepo = $productRepo;
+    
         $this->middleware('auth');
     }
     
@@ -96,7 +97,7 @@ class ProductsController extends Controller
 
     public function displayline($id)
     {
-        $products = DB::table('products')->where('productLine_id',$id)->get();//make more efficient filter out the products
+        $products = $this->productRepo->getProductLine($id);
         return view('products.showline')->with('Products',$products);
     }
 }

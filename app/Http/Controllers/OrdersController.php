@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -12,17 +12,15 @@ class OrdersController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+   /*  protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'orderDate' => ['required'],
-            'orderTime' => ['required'],
             'status' => ['required', 'string'],
             'customer_id' => ['required', 'string','unique'],
         ]);
-    }
-    
+    } */
+
     /**
      * Display a listing of the resource.
      *
@@ -38,27 +36,33 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(array $data)
+    public function create()
     {
-        return Order::create([
-            
-            'name' => $data['required'],
-            'orderDate' => $data['required'],
-            'orderTime' => $data['required'],
-            'status' => $data['required'],
-            'customer_id' => $data['required'],
-        ]);
+        
     }
 
     /**
      * Store a newly created resource in storage.
-     *
+     *  qw
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $this-> validate($request, [
+            'status' => ['required', 'string'],
+            'customer_id' => ['required', 'string','unique:orders'],
+        ]);
+        // return 1;
+        $order = new Order;
+        $order->orderDate = input(date("Y/m/d"));
+        $order->orderTime = input(date("h:i:sa"));
+        $order->status = $request->input('status');
+        $order->customer_id = $request->input('customer_id');
+        $order->save();
+
+        return redirect('/shop')->with('success','Your Order Has been Placed');
+        
     }
 
     /**

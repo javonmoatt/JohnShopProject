@@ -143,11 +143,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="{{ url('/') }}">JohnShop</a>
+              <a class="navbar-brand" href="{{ url('/shop') }}">JohnShop</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home/Shop</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/shop') }}">Home/Shop</a></li>
                 {{-- <li class="{{ set_active('shop') }}"><a class="nav-link" href="{{ url('/') }}">Home/Shop</a></li> --}}
                 <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
