@@ -42,8 +42,16 @@ class DashboardsController extends Controller
             return view('/dashboard',compact('user','order'));
         }
         elseif($user ->id == 3){
-
-            return view('/dashboard')->with(user,$user);
+            $order = DB::table('orders')
+            ->join('delivery','orders.id','delivery.order_id')
+            ->select('*')->where('driver','=',$user->id)->get();
+            $detail = DB::table('delivery')
+            ->join('orders', 'delivery.order_id', '=', 'orders.id')
+            ->join('order_details', 'orders.id', '=', 'order_details.order_id')
+            ->join('products', 'order_details.product_id', '=', 'products.id')
+            ->select('orders.*','order_details.*','products.name')->where('customer_id','=',$user->id)
+            ->get();
+            return view('/dashboard',compact('user','order','detail'));
         }
     }
 }

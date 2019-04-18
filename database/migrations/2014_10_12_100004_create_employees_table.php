@@ -25,7 +25,7 @@ class CreateEmployeesTable extends Migration
             $table->foreign('officeCode')->references('id')->on('offices');
             $table->integer('reportsTo')->unsigned()->nullable();
             $table->foreign('reportsTo')->references('id')->on('employees');
-            $table->integer('jobTitle');
+            $table->string('jobTitle');
             $table->timestamps();
         });
     }
