@@ -10,15 +10,11 @@ use DB;
 
 class DashboardsController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    private $dashboardRepo;
+
+    public function __construct(IDashboardRepository $dashboardRepo){
+        $this->dashboardRepo = $dashboardRepo;
+    }    
 
     /**
      * Show the application dashboard.
@@ -30,6 +26,7 @@ class DashboardsController extends Controller
         $user = Auth::user();
         if($user ->id == 1){
             $order = DB::table('orders')->select('*')->where('customer_id','=',$user->id)->get();
+            // $order = ['dashboardRepo' => $this->dashboardRepo->getOrders($user->id)];
             $detail = DB::table('orders')
             ->join('order_details', 'orders.id', '=', 'order_details.order_id')
             ->join('products', 'order_details.product_id', '=', 'products.id')
