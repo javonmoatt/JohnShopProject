@@ -10,12 +10,12 @@ use DB;
 
 class DashboardsController extends Controller
 {
-    private $dashboardRepo;
+    /* private $dashboardRepo;
 
     public function __construct(IDashboardRepository $dashboardRepo){
         $this->dashboardRepo = $dashboardRepo;
     }    
-
+ */
     /**
      * Show the application dashboard.
      *
