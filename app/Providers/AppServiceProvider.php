@@ -35,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public $singletons = [
         IProductRepository::class =>  ProductRepository::class,
+        IDashboardRepository::class => DashboardRepository::class,
     ];
 }
